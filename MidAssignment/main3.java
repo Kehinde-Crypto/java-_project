@@ -17,25 +17,44 @@ import java.util.Arrays;
 
 public class main3 {
   public static void main(String[] args) {
-    int[] num = { 2, 5, 5, 9, 4, 7, 0, 9, 6, 11, 12 };
+    int[] num = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-    double Sum = 0;
-    for (int i : num) {
-      Sum += i;
+    // Calculate mean
+    double mean = calculateMean(num);
+    System.out.println("Mean: " + mean);
+
+    // Calculate median
+    double median = calculateMedian(num);
+    System.out.println("Median: " + median);
+
+    // Calculate standard deviation
+    double stdDev = calculateStandardDeviation(num, mean);
+    System.out.println("Standard Deviation: " + stdDev);
+  }
+
+  public static double calculateMean(int[] num) {
+    double sum = 0;
+    for (int n : num) {
+      sum += n;
     }
+    return sum / num.length;
+  }
 
-    double Mean = (Sum / num.length);
-
-    System.out.println("" + Mean);
-
+  public static double calculateMedian(int[] num) {
     Arrays.sort(num);
-
-    int Median;
     if (num.length % 2 == 0) {
-      Median = (num[num.length - 1] / num[num.length]) / 2;
+      return (num[num.length / 2 - 1] + num[num.length / 2]) / 2.0;
     } else {
-      Median = (num[num.length / 2]);
+      return num[num.length / 2];
     }
-    System.out.println("" + Median);
+  }
+
+  public static double calculateStandardDeviation(int[] num, double mean) {
+    double sum = 0;
+    for (int n : num) {
+      sum += Math.pow(n - mean, 2);
+    }
+    double variance = sum / num.length;
+    return Math.sqrt(variance);
   }
 }
